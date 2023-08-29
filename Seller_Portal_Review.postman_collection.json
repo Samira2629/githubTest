@@ -1,0 +1,2241 @@
+{
+	"info": {
+		"_postman_id": "69235aef-9eac-4a00-a1e4-d7be1591b9fb",
+		"name": "Seller_Portal_Review",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25811362",
+		"_collection_link": "https://interstellar-flare-494732.postman.co/workspace/Ecom_Seller_Portal_Review-Assig~face2f09-4a1a-4b82-be07-619b7d72befc/collection/25811362-69235aef-9eac-4a00-a1e4-d7be1591b9fb?action=share&source=collection_link&creator=25811362"
+	},
+	"item": [
+		{
+			"name": "Admin SignIn",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "1. As a Seller I should be able to Sign In",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											" pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Responesbody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+											"});\r",
+											"pm.test(\"Content-Type is  header present\", function () {\r",
+											"    pm.response.to.have.header(\"Server\");\r",
+											"    pm.response.to.have.header(\"Date\");\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"123456\",\r\n  \"email\": \"admin@dashboard.com\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "2. As a Seller I should not be able to Sign In with invalid password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Responesbody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"password\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid Password\"); \r",
+											"    });\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Bad Request\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"12345\",\r\n  \"email\": \"admin@dashboard.com\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. As a Seller I should not be able to sign In with invalid email address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Responesbody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Bad Request\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"123456\",\r\n  \"email\": \"admi@dashboard.com\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. As a Seller I should not be able to Sign In without password field blank",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Responesbody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"password\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Please provide a password\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"\",\r\n  \"email\": \"admin@dashboard.com\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. As a Seller I should not be able to Sign In without password field and email field blank",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Responesbody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"password\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Please provide a password\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"email\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Please provide your email address\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"\",\r\n  \"email\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/admin/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get all review",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "6. As a Seller I should be able to get all product review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/review/all",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "7. As a Seller I should  not be able to get all product review without token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Authorization required\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/all",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "8. As a Seller I should not be able to get all product review with invalid token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Invalid token\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzA2OTM0YTUyMGEzZDY2NzA5N2Y1NDQiLCJyb2xlIjoic3VwZXItYWRtaW4iLCJlbWFpbCI6ImFkbWluQGRhc2hib2FyZC5jb20iLCJpYXQiOjE2OTI4MjgxNDAsImV4cCI6MTY5MzQzMjk0MH0.V",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/all",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "9. As a Seller I should not be able to get all product review without  endpoint",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzA2OTM0YTUyMGEzZDY2NzA5N2Y1NDQiLCJyb2xlIjoic3VwZXItYWRtaW4iLCJlbWFpbCI6ImFkbWluQGRhc2hib2FyZC5jb20iLCJpYXQiOjE2OTI4MjgxNDAsImV4cCI6MTY5MzQzMjk0MH0.V",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Create Review",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "10.As a Seller I should be able to create Review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"success\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"608cf3df67474a2ed8e135a9\",\r\n  \"order\": \"64e68bcd74a93f7ed5a7ef87\",\r\n  \"rating\": \"5\",\r\n  \"comment\": \"ITS SO COMFORTABLE,I LOVE IT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								},
+								"description": "Date: 08/24/2023\n\nFunction Name: Seller can Create Review\n\nSE Name: Shimul\n\nTester Name: Samira\n\nReviewer Name:Shiblu Ahmad\n\nObjective: Seller should be able to create a product review.\n\nExpected Result: It should be able to create product review.\n\nActula Result: It add the review successfully.\n\nTest Status: Passed"
+							},
+							"response": []
+						},
+						{
+							"name": "https://staging-be-ecom.techserve4u.com/api/review/create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"any\",\r\n  \"order\": \"any\",\r\n  \"rating\": \"any\",\r\n  \"comment\": \"any\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "11. .As a Seller I should  not be able to create Review without product id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"error\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Product id is required\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"\",\r\n  \"order\": \"63bb28f36b731242d03b6f34\",\r\n  \"rating\": \"5\",\r\n  \"comment\": \"ITS SO COMFORTABLE,I LOVE IT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12\\. .As a Seller I should  not be able to create Review without  order id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"error\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Order id is required\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"608cf3df67474a2ed8e135a9\",\r\n  \"order\": \"\",\r\n  \"rating\": \"5\",\r\n  \"comment\": \"ITS SO COMFORTABLE,I LOVE IT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "13. .As a Seller I should  not be able to create Review without rating",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"error\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Rating is required\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"608cf3df67474a2ed8e135a9\",\r\n  \"order\": \"63bb28f36b731242d03b6f34\",\r\n  \"rating\": \"\",\r\n  \"comment\": \"ITS SO COMFORTABLE,I LOVE IT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "14 .As a Seller I should  not be able to create Review without valid rating no.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"error\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Rating should be between 1 and 5\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"608cf3df67474a2ed8e135a9\",\r\n  \"order\": \"63bb28f36b731242d03b6f34\",\r\n  \"rating\": \"0\",\r\n  \"comment\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "15 .As a Seller I should  not be able to create Review without product ,order and rating field blank",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"error\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Product id is required\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"\",\r\n  \"order\": \"\",\r\n  \"rating\": \"\",\r\n  \"comment\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "16..As a Seller I should be able to create Review without seller token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"message\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Authorization required\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"608cf3df67474a2ed8e135a9\",\r\n  \"order\": \"63bb28f36b731242d03b6f34\",\r\n  \"rating\": \"5\",\r\n  \"comment\": \"ITS SO COMFORTABLE,I LOVE IT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "17..As a Seller I should be able to create Review with invalid token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"   pm.expect(pm.response.text()).to.include(\"message\"); \r",
+											"   pm.expect(pm.response.text()).to.include(\"Invalid token\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzA2OTM0YTUyMGEzZDY2NzA5N2Y1NDQiLCJyb2xlIjoic3VwZXItYWRtaW4iLCJlbWFpbCI6ImFkbWluQGRhc2hib2FyZC5jb20iLCJpYXQiOjE2OTI4Mjgx",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product\": \"608cf3df67474a2ed8e135a9\",\r\n  \"order\": \"63bb28f36b731242d03b6f34\",\r\n  \"rating\": \"5\",\r\n  \"comment\": \"ITS SO COMFORTABLE,I LOVE IT\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/create",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get Review for Product",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "18. As a Seller I should be able to Get All  Review for Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/get/{{product_id}}",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"get",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "19. . As a Seller I should not be able to Get All  Review for Product without review id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/get/",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"get",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "20. . As a Seller I should not be able to Get All  Review for Product without host key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Bad Request\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"host": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/review/get/608cf3df67474a2ed8e135a9",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"review",
+										"get",
+										"608cf3df67474a2ed8e135a9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Get review per order",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "21.As a Seller I should be able to Get review per order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Resposebody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"hasReview\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/getsingle/{{product_id}}/{{order_id}}",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"getsingle",
+										"{{product_id}}",
+										"{{order_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "22. .As a Seller I should be able to Get review per order without product id.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/getsingle/{{order_id}}",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"getsingle",
+										"{{order_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "23. .As a Seller I should be able to Get review per order without order id.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/getsingle/{{product_id}}",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"getsingle",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "24..As a Seller I should be able to Get review per order without seller token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Resposebody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Authorization required\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/getsingle/{{product_id}}/{{order_id}}",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"getsingle",
+										"{{product_id}}",
+										"{{order_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "25..As a Seller I should be able to Get review per order with invalid token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Resposebody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"Invalid token\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzA2OTM0YTUyMGEzZDY2NzA5N2Y1NDQiLCJyb2xlIjoic3VwZXItYWRtaW4iLCJlbWFpbCI6ImFkbWluQGRhc2hib2FyZC5jb20iLCJpYXQiOjE2OTI4MjgxNDAsImV4cCI6MTY5MzQzMjk0MH0.V",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/getsingle/{{product_id}}/{{order_id}}",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"getsingle",
+										"{{product_id}}",
+										"{{order_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Publish Review",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "26. As a Seller I should be able to publish review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"     \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"isPublished\": \"true\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/togglepublish/64e83c7e74a93f7ed5a7f1c4",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"togglepublish",
+										"64e83c7e74a93f7ed5a7f1c4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "27. As a Seller I should  not be able to publish  field blank",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"error\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"Something went wrong\");\r",
+											"    \r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"isPublished\": \"\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/togglepublish/64e68bcd74a93f7ed5a7ef87",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"togglepublish",
+										"64e68bcd74a93f7ed5a7ef87"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "28..As a Seller I should not  be able to publish review id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"isPublished\": \"true\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/togglepublish/",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"togglepublish",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "29..As a Seller I should not be able to publish review without Authorization",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"Authorization required\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"isPublished\": \"true\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/togglepublish/64e68bcd74a93f7ed5a7ef87",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"togglepublish",
+										"64e68bcd74a93f7ed5a7ef87"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "30..As a Seller I should not be able to publish review with invalid token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"message\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid token\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzA2OTM0YTUyMGEzZDY2NzA5N2Y1NDQiLCJyb2xlIjoic3VwZXItYWRtaW4iLCJlbWFpbCI6ImFkbWluQGRhc2hib2FyZC5jb20iLCJpYXQiOjE2OTI4MjgxNDAsImV4cCI6MTY5MzQzMjk0MH0.V",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"isPublished\": \"true\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/togglepublish/64e68bcd74a93f7ed5a7ef87",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"togglepublish",
+										"64e68bcd74a93f7ed5a7ef87"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Review Update",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "31.As a Seller I should be able to update Review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"pm.test(\"ResponseBody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+											"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"     \r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"comment\": \"Thank for your business\",\r\n  \"reply\": \"yes\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/update/64e6a77774a93f7ed5a7ef97",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"update",
+										"64e6a77774a93f7ed5a7ef97"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "32.As a Seller I should not be able to update Review without seller token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"comment\":\"\",\r\n  \"reply\": \"yes\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/update",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "33..As a Seller I should not be able to update Review without product id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"comment\":\"\",\r\n  \"reply\": \"yes\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/update",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "34..As a Seller I should not be able to update Review with invalid seller token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code name has string\", function () {\r",
+											"    pm.response.to.have.status(\"Not Found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzA2OTM0YTUyMGEzZDY2NzA5N2Y1NDQiLCJyb2xlIjoic3VwZXItYWRtaW4iLCJlbWFpbCI6ImFkbWluQGRhc2hib2FyZC5jb20iLCJpYXQiOjE2OTI4MjgxNDAsImV4cCI6MTY5MzQzMjk0MH0.V",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"comment\":\"\",\r\n  \"reply\": \"yes\"\r\n}"
+								},
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/update",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Delete Review",
+			"item": [
+				{
+					"name": "Positive",
+					"item": [
+						{
+							"name": "35. As a Seller I should be able to Delete Review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Responsebody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/delete/64e83c7e74a93f7ed5a7f1c4",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"delete",
+										"64e83c7e74a93f7ed5a7f1c4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Negative",
+					"item": [
+						{
+							"name": "36. As a Seller I should not be able to Delete Review",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 1200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(1200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Responsebody matches string\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+											"     pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/delete/64e68bcd74a93f7ed5a7ef87",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"delete",
+										"64e68bcd74a93f7ed5a7ef87"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "37. As a Seller I should not be able to Delete Review without product id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{seller_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://staging-be-ecom.techserve4u.com/api/review/delete/",
+									"protocol": "https",
+									"host": [
+										"staging-be-ecom",
+										"techserve4u",
+										"com"
+									],
+									"path": [
+										"api",
+										"review",
+										"delete",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
